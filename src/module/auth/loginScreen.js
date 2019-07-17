@@ -1,103 +1,110 @@
 import React, { Component } from 'react';
 
 import {
-  View, Image, StyleSheet, Text, Dimensions,
+  View, Image, StyleSheet, Text, Dimensions, TouchableOpacity, ScrollView
 } from 'react-native';
+import { TextField } from 'react-native-material-textfield';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 
 class Login extends Component {
-  componentDidMount() {}
 
-  render() {
-    return (
-      <View style={styles.container}>
+    state = {
+        email: '',
+        password: '',
+    }
 
-        <View style={styles.subContent}>
+    componentDidMount() {}
 
-          {/* header content */}
-          <View style={styles.headerContent}>
+    render() {
+        let { email, password } = this.state;
 
-            <Image
-              source={require('../../assets/header_login.png')}
-              style={styles.imageImage}
-            />
-            <View style={styles.logoContent}>
+        return (
+            <View style={styles.container}>
+                <ScrollView contentContainerStyle={styles.container}>
 
-              <View style={styles.logoView}>
+                    {/* header content */}
+                    <View style={styles.headerContent}>
 
-                <Image
-                  source={require('../../assets/logo.png')}
-                  style={styles.groupImage}
-                  resizeMode="contain"
-                />
-                <Text style={styles.scratchText}>Scratch</Text>
+                        <Image
+                            source={require('../../assets/header_login.png')}
+                            style={styles.imageImage}
+                        />
+                        <View style={styles.logoContent}>
 
-              </View>
+                        <View style={styles.logoView}>
 
-              <Text style={styles.welcomeBackText}>Welcome Back!</Text>
+                            <Image
+                            source={require('../../assets/logo.png')}
+                            style={styles.groupImage}
+                            resizeMode="contain"
+                            />
+                            <Text style={styles.scratchText}>Scratch</Text>
 
+                        </View>
+
+                        <Text style={styles.welcomeBackText}>Welcome Back!</Text>
+
+                        </View>
+
+                    </View>
+
+                    {/* form content */}
+                    <View style={styles.formContent}>
+
+                        <Text style={styles.pleaseLoginToContText}>
+                            Please login to continue.
+                        </Text>
+
+                        {/* email */}
+                        <TextField
+                            label='Email Address'
+                            value={email}
+                            tintColor = '#A8A8A8'
+                            textColor = '#030F09'
+                            onChangeText={ (email) => this.setState({ email }) }
+                        />
+
+                        {/* password view */}
+                        <View style={styles.passwordView}>
+                            <TouchableOpacity style={styles.forgotView}>
+                                <Text style={styles.forgotPasswordText}>Forgot password?</Text>
+                            </TouchableOpacity>
+                            <TextField
+                                label='Password'
+                                value={password}
+                                tintColor = '#A8A8A8'
+                                textColor = '#030F09'
+                                onChangeText={ (password) => this.setState({ password }) }
+                            />
+                        </View>
+                        
+                        <TouchableOpacity style={styles.buttonGroupView}>
+                            <Text style={styles.login}>Login</Text>
+                        </TouchableOpacity>
+
+                        <View style={styles.signUpView}>
+                            <Text style={styles.noAccount}>don't have an account ?</Text>
+                            <TouchableOpacity>
+                                <Text style={styles.createAccout}>
+                                    Create Account Here
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+
+                    </View>
+
+                </ScrollView>
             </View>
-
-          </View>
-
-          {/* form content */}
-          <View style={styles.formContent}>
-
-            <Text style={styles.pleaseLoginToContText}>
-                Please login to continue.
-            </Text>
-
-            <View
-              pointerEvents="box-none"
-              style={{
-                height: 66,
-                marginLeft: 25,
-                marginRight: 25,
-                marginTop: 142,
-              }}
-            >
-              <Text style={styles.forgotPasswordText}>Forgot password?</Text>
-              <View style={styles.inputView}>
-                <Text style={styles.labelText}>Password</Text>
-                <Text style={styles.password}>●●●●●●●●</Text>
-                <View style={{ flex: 1 }} />
-                <View style={styles.rectangleView}/>
-              </View>
-            </View>
-            
-            <View style={styles.buttonGroupView}>
-              <Text style={styles.login}>Login</Text>
-            </View>
-            <View
-              style={{ flex: 1 }}
-            />
-            <View style={styles.signUpView}>
-              <Text style={styles.noAccount}>don't have an account ?</Text>
-              <View style={{ flex: 1 }} />
-              <Text style={styles.createAccout}>
-                Create Account Here
-              </Text>
-            </View>
-
-          </View>
-
-        </View>
-
-      </View>
-    );
-  }
+        );
+    }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
-  },
-  subContent: {
-    flex: 1,
-    position: 'absolute',
     flexDirection: 'column',
+    justifyContent: 'flex-start'
   },
   headerContent: {
     width: '100%',
@@ -112,60 +119,28 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
 
-  inputTwoView: {
-    backgroundColor: 'transparent',
-    height: 65,
-    marginLeft: 25,
-    marginRight: 25,
-  },
-  labelTwoText: {
-    color: 'rgb(168, 168, 168)',
-    fontSize: 14,
-    fontStyle: 'normal',
-    fontWeight: 'normal',
-    textAlign: 'left',
-    lineHeight: 22,
-    backgroundColor: 'transparent',
-    alignSelf: 'flex-start',
-  },
-  email: {
-    backgroundColor: 'transparent',
-    color: 'rgb(3, 15, 9)',
-    fontSize: 16,
-    fontStyle: 'normal',
-    fontWeight: 'normal',
-    textAlign: 'left',
-    lineHeight: 22,
-    marginRight: 207,
-    marginTop: 16,
-  },
   rectangleTwoView: {
     backgroundColor: 'rgb(204, 204, 204)',
     height: 1,
   },
   imageImage: {
     resizeMode: 'cover',
-    backgroundColor: 'transparent',
-    position: 'absolute',
     left: 0,
     right: 0,
     top: 0,
     bottom: 0,
   },
   logoView: {
-    backgroundColor: 'transparent',
     position: 'absolute',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
   groupImage: {
-    backgroundColor: 'transparent',
     height: 26,
     width: 26,
   },
   scratchText: {
-    backgroundColor: 'transparent',
     color: 'rgb(54, 56, 55)',
     fontSize: 16,
     fontStyle: 'normal',
@@ -183,7 +158,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'left',
     paddingTop: 1,
-    backgroundColor: 'transparent',
     marginTop: 44,
   },
 
@@ -199,9 +173,19 @@ const styles = StyleSheet.create({
     fontStyle: 'normal',
     fontWeight: 'normal',
     textAlign: 'left',
-    backgroundColor: 'transparent',
     alignSelf: 'flex-start',
     marginTop: 30,
+    marginBottom: 30
+  },
+
+  passwordView: {
+      marginTop: 10,
+  },
+
+  forgotView: {
+    position: 'absolute',
+    right: 0,
+    top: 0,
   },
 
   forgotPasswordText: {
@@ -211,29 +195,8 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     textAlign: 'left',
     lineHeight: 22,
-    backgroundColor: 'transparent',
-    position: 'absolute',
-    right: 0,
-    top: 0,
   },
-  inputView: {
-    backgroundColor: 'transparent',
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 1,
-    height: 65,
-  },
-  labelText: {
-    backgroundColor: 'transparent',
-    color: 'rgb(168, 168, 168)',
-    fontSize: 14,
-    fontStyle: 'normal',
-    fontWeight: 'normal',
-    textAlign: 'left',
-    lineHeight: 22,
-    alignSelf: 'flex-start',
-  },
+
   password: {
     color: 'rgb(3, 15, 9)',
     fontSize: 16,
@@ -241,7 +204,6 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     textAlign: 'left',
     lineHeight: 22,
-    backgroundColor: 'transparent',
     marginRight: 251,
     marginTop: 16,
   },
@@ -256,29 +218,25 @@ const styles = StyleSheet.create({
     shadowRadius: 20,
     shadowOpacity: 1,
     height: 50,
-    marginLeft: 25,
-    marginRight: 25,
+    width: '100%',
     marginTop: 30,
     justifyContent: 'center',
   },
   login: {
-    backgroundColor: 'transparent',
     color: 'white',
     fontSize: 16,
     fontStyle: 'normal',
     fontWeight: 'bold',
     textAlign: 'center',
     lineHeight: 21,
-    paddingTop: 1,
-    marginLeft: 141,
-    marginRight: 141,
   },
   signUpView: {
-    backgroundColor: 'transparent',
-    alignSelf: 'flex-end',
-    width: 174,
     height: 45,
-    marginRight: 98,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 40
+
   },
   noAccount: {
     color: 'rgb(168, 168, 168)',
@@ -287,20 +245,14 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     textAlign: 'center',
     lineHeight: 22,
-    backgroundColor: 'transparent',
-    marginLeft: 35,
-    marginRight: 35,
   },
   createAccout: {
-    backgroundColor: 'transparent',
     color: 'rgb(48, 190, 118)',
     fontSize: 16,
     fontStyle: 'normal',
     fontWeight: 'bold',
     textAlign: 'center',
     letterSpacing: 0.32,
-    marginLeft: 9,
-    marginRight: 4,
   },
 });
 

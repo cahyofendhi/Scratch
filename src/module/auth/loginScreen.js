@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 
 import {
-  View, Image, StyleSheet, Text, Dimensions, TouchableOpacity, ScrollView
+  View, Image, StyleSheet, Text, Dimensions, TouchableOpacity
 } from 'react-native';
+
 import { TextField } from 'react-native-material-textfield';
+import InputScrollView from 'react-native-input-scroll-view';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 
@@ -20,8 +22,8 @@ class Login extends Component {
         let { email, password } = this.state;
 
         return (
-            <View style={styles.container}>
-                <ScrollView contentContainerStyle={styles.container}>
+            <InputScrollView>
+                <View style={styles.container}>
 
                     {/* header content */}
                     <View style={styles.headerContent}>
@@ -62,6 +64,7 @@ class Login extends Component {
                             value={email}
                             tintColor = '#A8A8A8'
                             textColor = '#030F09'
+                            keyboardType='email-address'
                             onChangeText={ (email) => this.setState({ email }) }
                         />
 
@@ -75,6 +78,7 @@ class Login extends Component {
                                 value={password}
                                 tintColor = '#A8A8A8'
                                 textColor = '#030F09'
+                                secureTextEntry={true}
                                 onChangeText={ (password) => this.setState({ password }) }
                             />
                         </View>
@@ -94,8 +98,8 @@ class Login extends Component {
 
                     </View>
 
-                </ScrollView>
-            </View>
+                </View>
+            </InputScrollView>
         );
     }
 }
@@ -124,11 +128,7 @@ const styles = StyleSheet.create({
     height: 1,
   },
   imageImage: {
-    resizeMode: 'cover',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
+    width: '100%',
   },
   logoView: {
     position: 'absolute',

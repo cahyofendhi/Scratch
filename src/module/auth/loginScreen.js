@@ -1,130 +1,117 @@
 import React, { Component } from 'react';
 
 import {
-  View, Image, StyleSheet, Text,
+  View, Image, StyleSheet, Text, Dimensions,
 } from 'react-native';
 
+const screenWidth = Math.round(Dimensions.get('window').width);
 
-export default class Login extends Component {
-
+class Login extends Component {
   componentDidMount() {}
 
   render() {
     return (
-      <View style={styles.loginView}>
-        <View
-          pointerEvents="box-none"
-          style={{
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            top: 0,
-            bottom: 0,
-            justifyContent: 'center',
-          }}
-        >
-          <View style={styles.inputTwoView}>
-            <Text style={styles.labelTwoText}>
-                Email address
-            </Text>
-            <Text style={styles.email}>
-                user@email.com
-            </Text>
-            <View
-              style={{ flex: 1 }}
-            />
-            <View
-              style={styles.rectangleTwoView}
-            />
-          </View>
-        </View>
-        <View
-          pointerEvents="box-none"
-          style={{
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            top: 0,
-            bottom: 123,
-          }}
-        >
-          <View
-            pointerEvents="box-none"
-            style={{ height: 285 }}
-          >
+      <View style={styles.container}>
+
+        <View style={styles.subContent}>
+
+          {/* header content */}
+          <View style={styles.headerContent}>
+
             <Image
               source={require('../../assets/header_login.png')}
               style={styles.imageImage}
-              resizeMode="cover"
             />
-            <View
-              pointerEvents="box-none"
-              style={{
-                position: 'absolute',
-                left: 25,
-                width: 170,
-                top: 60,
-                height: 105,
-                alignItems: 'flex-start',
-              }}
-            >
+            <View style={styles.logoContent}>
+
               <View style={styles.logoView}>
+
                 <Image
                   source={require('../../assets/logo.png')}
                   style={styles.groupImage}
                   resizeMode="contain"
                 />
                 <Text style={styles.scratchText}>Scratch</Text>
+
               </View>
+
               <Text style={styles.welcomeBackText}>Welcome Back!</Text>
+
             </View>
+
           </View>
-          <Text style={styles.pleaseLoginToContText}>
+
+          {/* form content */}
+          <View style={styles.formContent}>
+
+            <Text style={styles.pleaseLoginToContText}>
                 Please login to continue.
-          </Text>
-          <View
-            pointerEvents="box-none"
-            style={{
-              height: 66,
-              marginLeft: 25,
-              marginRight: 25,
-              marginTop: 142,
-            }}
-          >
-            <Text style={styles.forgotPasswordText}>Forgot password?</Text>
-            <View style={styles.inputView}>
-              <Text style={styles.labelText}>Password</Text>
-              <Text style={styles.password}>●●●●●●●●</Text>
-              <View style={{flex: 1}}/>
-              <View
-                style={styles.rectangleView}
-              />
-            </View>
-          </View>
-          <View style={styles.buttonGroupView}>
-            <Text style={styles.login}>Login</Text>
-          </View>
-          <View
-            style={{ flex: 1,}}
-          />
-          <View style={styles.signUpView}>
-            <Text style={styles.noAccount}>don't have an account ?</Text>
-            <View style={{ flex: 1}}/>
-            <Text style={styles.createAccout}>
-                Create Account Here
             </Text>
+
+            <View
+              pointerEvents="box-none"
+              style={{
+                height: 66,
+                marginLeft: 25,
+                marginRight: 25,
+                marginTop: 142,
+              }}
+            >
+              <Text style={styles.forgotPasswordText}>Forgot password?</Text>
+              <View style={styles.inputView}>
+                <Text style={styles.labelText}>Password</Text>
+                <Text style={styles.password}>●●●●●●●●</Text>
+                <View style={{ flex: 1 }} />
+                <View style={styles.rectangleView}/>
+              </View>
+            </View>
+            
+            <View style={styles.buttonGroupView}>
+              <Text style={styles.login}>Login</Text>
+            </View>
+            <View
+              style={{ flex: 1 }}
+            />
+            <View style={styles.signUpView}>
+              <Text style={styles.noAccount}>don't have an account ?</Text>
+              <View style={{ flex: 1 }} />
+              <Text style={styles.createAccout}>
+                Create Account Here
+              </Text>
+            </View>
+
           </View>
+
         </View>
+
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  loginView: {
-    backgroundColor: 'white',
+  container: {
     flex: 1,
+    backgroundColor: 'white',
   },
+  subContent: {
+    flex: 1,
+    position: 'absolute',
+    flexDirection: 'column',
+  },
+  headerContent: {
+    width: '100%',
+    height: screenWidth / 1.5,
+  },
+  logoContent: {
+    flex: 1,
+    flexDirection: 'row',
+    position: 'absolute',
+    left: 25,
+    top: 60,
+    alignItems: 'flex-start',
+  },
+
   inputTwoView: {
     backgroundColor: 'transparent',
     height: 65,
@@ -163,34 +150,31 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: 0,
-    height: 285,
+    bottom: 0,
   },
   logoView: {
     backgroundColor: 'transparent',
-    width: 102,
-    height: 28,
+    position: 'absolute',
     flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   groupImage: {
     backgroundColor: 'transparent',
-    flex: 1,
     height: 26,
-    marginRight: 10,
+    width: 26,
   },
   scratchText: {
     backgroundColor: 'transparent',
     color: 'rgb(54, 56, 55)',
-    fontSize: 20,
+    fontSize: 16,
     fontStyle: 'normal',
     fontWeight: 'bold',
     textAlign: 'left',
-    lineHeight: 20,
     letterSpacing: 0.4,
-    paddingTop: 8,
-    flex: 1,
     marginLeft: 10,
-    marginRight: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   welcomeBackText: {
     color: 'rgb(3, 15, 9)',
@@ -198,23 +182,28 @@ const styles = StyleSheet.create({
     fontStyle: 'normal',
     fontWeight: 'bold',
     textAlign: 'left',
-    lineHeight: 32,
     paddingTop: 1,
     backgroundColor: 'transparent',
     marginTop: 44,
   },
+
+  formContent: {
+    padding: 20,
+    flex: 1,
+    flexDirection: 'column',
+  },
+
   pleaseLoginToContText: {
     color: 'rgb(96, 96, 96)',
     fontSize: 14,
     fontStyle: 'normal',
     fontWeight: 'normal',
     textAlign: 'left',
-    lineHeight: 22,
     backgroundColor: 'transparent',
     alignSelf: 'flex-start',
-    marginLeft: 25,
-    marginTop: 19,
+    marginTop: 30,
   },
+
   forgotPasswordText: {
     color: 'rgb(96, 96, 96)',
     fontSize: 14,
@@ -314,3 +303,5 @@ const styles = StyleSheet.create({
     marginRight: 4,
   },
 });
+
+export default Login;

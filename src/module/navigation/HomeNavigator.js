@@ -2,20 +2,20 @@ import React from 'react';
 import { Text, View, Image } from 'react-native';
 
 import { createBottomTabNavigator } from 'react-navigation';
-import HomeScreen from '../home/HomeScreen';
+import FeedScreen from '../feed/FeedScreen';
 import SearchScreen from '../search/SearchScreen';
 
 const HomeNavigator = createBottomTabNavigator({
   Search: SearchScreen,
-  Home: HomeScreen,
+  Feed: FeedScreen,
   Cook: SearchScreen,
 }, {
-  initialRouteName: 'Home',
+  initialRouteName: 'Feed',
   defaultNavigationOptions: ({ navigation }) => ({
     tabBarIcon: ({ focused, tintColor }) => {
       const { routeName } = navigation.state;
       switch (routeName) {
-        case 'Home':
+        case 'Feed':
           return (
             <Image
               source={require('../../assets/icon_explore.png')}

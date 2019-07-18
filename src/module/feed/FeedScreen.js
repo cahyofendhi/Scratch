@@ -1,18 +1,26 @@
 import React, { Component } from 'react';
-import { View, 
-         Text,
-         Image,
-         StyleSheet 
-        } from 'react-native';
-import logo from '../../assets/logo.png';         
+import {
+ View,
+  Text,
+  Image,
+  StyleSheet,
+  FlatList,
+  Dimensions
+} from 'react-native';
 
-class HomeScreen extends Component {
+import ItemFeed from './ItemFeed';
+
+class FeedScreen extends Component {
+
+  state = {
+    data : [1, 2, 3, 4, 5, 6, 7]
+  }
 
   render() {
     return (
       <View style={styles.container}>
 
-        <View style={{height: 50}}/>
+        <View style={{ height: 50 }} />
 
         {/* header */}
         <View style={styles.nav}>
@@ -20,25 +28,39 @@ class HomeScreen extends Component {
           <Image
             style={styles.logo}
             source={require('../../assets/logo.png')}
-            resizeMode='contain'
+            resizeMode="contain"
           />
 
           <View style={styles.menu}>
             <Image
               style={styles.iconNotif}
               source={require('../../assets/icon_notif.png')}
-              resizeMode='contain'
+              resizeMode="contain"
             />
 
             <Image
               style={styles.iconMessage}
               source={require('../../assets/icon_message.png')}
-              resizeMode='contain'
+              resizeMode="contain"
             />
 
           </View>
 
         </View>
+
+        {/* <View style={styles.listContainer}> */}
+          <FlatList
+            data={this.state.data}
+            showsVerticalScrollIndicator={false}
+            renderItem={({item, index}) => 
+                <ItemFeed
+                    data={item}
+                    index={index}    
+                />
+            }
+            keyExtractor={(item, index) => index.toString()}
+          />
+        {/* </View> */}
 
       </View>
     );
@@ -61,10 +83,10 @@ const styles = StyleSheet.create({
 
   },
   logo: {
-		width: 35,
-		height: 35,
-		flexDirection: "row",
-		alignItems: "center",
+    width: 35,
+    height: 35,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   menu: {
     flexDirection: 'row',
@@ -78,7 +100,15 @@ const styles = StyleSheet.create({
   iconMessage: {
     padding: 10,
   },
+
+  // item
+  listContainer: {
+    paddingBottom: 10,
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+  },
+
 });
 
 
-export default HomeScreen;
+export default FeedScreen;

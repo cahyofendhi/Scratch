@@ -9,7 +9,7 @@ import InputScrollView from 'react-native-input-scroll-view';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 
-class Login extends Component {
+class LoginScreen extends Component {
 
     state = {
         email: '',
@@ -17,6 +17,10 @@ class Login extends Component {
     }
 
     componentDidMount() {}
+
+    submitLogin = () => {
+      this.props.navigation.navigate('MainHome')
+    }
 
     render() {
         let { email, password } = this.state;
@@ -37,9 +41,9 @@ class Login extends Component {
                         <View style={styles.logoView}>
 
                             <Image
-                            source={require('../../assets/logo.png')}
-                            style={styles.groupImage}
-                            resizeMode="contain"
+                              source={require('../../assets/logo.png')}
+                              style={styles.groupImage}
+                              resizeMode="contain"
                             />
                             <Text style={styles.scratchText}>Scratch</Text>
 
@@ -83,7 +87,7 @@ class Login extends Component {
                             />
                         </View>
                         
-                        <TouchableOpacity style={styles.buttonGroupView}>
+                        <TouchableOpacity style={styles.buttonGroupView} onPress={() => this.submitLogin()}>
                             <Text style={styles.login}>Login</Text>
                         </TouchableOpacity>
 
@@ -137,8 +141,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   groupImage: {
-    height: 26,
-    width: 26,
+    height: 35,
+    width: 35,
   },
   scratchText: {
     color: 'rgb(54, 56, 55)',
@@ -256,4 +260,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+export default LoginScreen;

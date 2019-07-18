@@ -5,7 +5,7 @@ import {
   Image,
   StyleSheet,
   FlatList,
-  Dimensions
+  Platform,
 } from 'react-native';
 
 import ItemFeed from './ItemFeed';
@@ -18,19 +18,27 @@ class FeedScreen extends Component {
   }
 
   render() {
+
+    let navTop = null
+    if (Platform.OS == 'ios'){
+      navTop = <View style={{ height: 20 }} />
+    }
+
     return (
       <View style={styles.container}>
 
-        <View style={{ height: 50 }} />
+        {navTop}
 
         {/* header */}
         <View style={styles.nav}>
 
-          <Image
-            style={styles.logo}
-            source={require('../../assets/logo.png')}
-            resizeMode="contain"
-          />
+          <View style={styles.logoView}>
+            <Image
+              source={require('../../assets/logo.png')}
+              style={styles.logo}
+              resizeMode="contain"/>
+            <Text style={styles.scratchText}>Scratch</Text>
+          </View>
 
           <View style={styles.menu}>
             <TouchableOpacity>
@@ -89,10 +97,26 @@ const styles = StyleSheet.create({
     paddingRight: 20,
 
   },
+  logoView: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   logo: {
     width: 35,
     height: 35,
     flexDirection: 'row',
+    alignItems: 'center',
+  },
+  scratchText: {
+    color: 'rgb(54, 56, 55)',
+    fontSize: 16,
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    textAlign: 'left',
+    letterSpacing: 0.4,
+    marginLeft: 10,
+    justifyContent: 'center',
     alignItems: 'center',
   },
   menu: {

@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import ItemFeed from './ItemFeed';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class FeedScreen extends Component {
 
@@ -32,17 +33,21 @@ class FeedScreen extends Component {
           />
 
           <View style={styles.menu}>
-            <Image
-              style={styles.iconNotif}
-              source={require('../../assets/icon_notif.png')}
-              resizeMode="contain"
-            />
+            <TouchableOpacity>
+              <Image
+                style={styles.iconNotif}
+                source={require('../../assets/icon_notif.png')}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
 
-            <Image
-              style={styles.iconMessage}
-              source={require('../../assets/icon_message.png')}
-              resizeMode="contain"
-            />
+            <TouchableOpacity>
+              <Image
+                style={styles.iconMessage}
+                source={require('../../assets/icon_message.png')}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
 
           </View>
 
@@ -50,6 +55,8 @@ class FeedScreen extends Component {
 
         {/* <View style={styles.listContainer}> */}
           <FlatList
+            style={{top: 0, left: 0, right: 0, bottom: 0}}
+            contentContainerStyle={styles.listContainer}
             data={this.state.data}
             showsVerticalScrollIndicator={false}
             renderItem={({item, index}) => 
@@ -70,13 +77,13 @@ class FeedScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
     backgroundColor: 'white',
   },
   nav: {
     height: 50,
-    flex: 1,
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'space-between',
     paddingLeft: 20,
     paddingRight: 20,
@@ -95,7 +102,7 @@ const styles = StyleSheet.create({
   },
   iconNotif: {
     padding: 10,
-    marginRight: 10,
+    marginRight: 20,
   },
   iconMessage: {
     padding: 10,

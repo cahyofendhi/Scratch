@@ -16,8 +16,6 @@ class LoginScreen extends Component {
         password: '',
     }
 
-    componentDidMount() {}
-
     submitLogin = () => {
       this.props.navigation.navigate('MainHome')
     }

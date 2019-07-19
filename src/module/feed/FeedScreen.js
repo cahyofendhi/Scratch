@@ -45,7 +45,7 @@ class FeedScreen extends Component {
           </View>
 
           <View style={styles.menu}>
-            <TouchableOpacity>
+            <TouchableOpacity style={{padding: 10}}>
               <Image
                 style={styles.iconNotif}
                 source={require('../../assets/icon_notif.png')}
@@ -53,9 +53,8 @@ class FeedScreen extends Component {
               />
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity style={styles.iconMessage}>
               <Image
-                style={styles.iconMessage}
                 source={require('../../assets/icon_message.png')}
                 resizeMode="contain"
               />
@@ -129,8 +128,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   iconNotif: {
-    padding: 10,
-    marginRight: 20,
+    marginRight: 10,
   },
   iconMessage: {
     padding: 10,

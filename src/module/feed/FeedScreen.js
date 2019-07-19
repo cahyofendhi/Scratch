@@ -17,6 +17,10 @@ class FeedScreen extends Component {
     data : [1, 2, 3, 4, 5, 6, 7]
   }
 
+  goToDetail = () => {
+    this.props.navigation.navigate('DetailFeed')
+  }
+
   render() {
 
     let navTop = null
@@ -61,21 +65,21 @@ class FeedScreen extends Component {
 
         </View>
 
-        {/* <View style={styles.listContainer}> */}
-          <FlatList
-            style={{top: 0, left: 0, right: 0, bottom: 0}}
-            contentContainerStyle={styles.listContainer}
-            data={this.state.data}
-            showsVerticalScrollIndicator={false}
-            renderItem={({item, index}) => 
-                <ItemFeed
-                    data={item}
-                    index={index}    
-                />
-            }
-            keyExtractor={(item, index) => index.toString()}
-          />
-        {/* </View> */}
+        <FlatList
+          style={{top: 0, left: 0, right: 0, bottom: 0}}
+          contentContainerStyle={styles.listContainer}
+          data={this.state.data}
+          showsVerticalScrollIndicator={false}
+          renderItem={({item, index}) => 
+              <ItemFeed
+                  onPress={this.goToDetail}
+                  data={item}
+                  index={index}    
+              />
+          }
+          numColumns={1}
+          keyExtractor={(item, index) => index.toString()}
+        />
 
       </View>
     );
@@ -134,9 +138,7 @@ const styles = StyleSheet.create({
 
   // item
   listContainer: {
-    paddingBottom: 10,
-    flexDirection: 'row',
-    flexWrap: 'wrap'
+    paddingBottom: 10
   },
 
 });

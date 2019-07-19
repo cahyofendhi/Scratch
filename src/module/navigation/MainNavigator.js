@@ -1,8 +1,17 @@
 import { createStackNavigator, createAppContainer } from 'react-navigation';
-import LoginScreen from '../auth/LoginScreen';
+
+import SplashScreen from '../SplashScreen';
+import LoginScreen from '../auth/loginScreen';
 import HomeNavigator from './HomeNavigator';
+import DetailFeedScreen from '../feed/DetailFeedScreen';
 
 const MainNavigator = createStackNavigator({
+  Splash: {
+    screen: SplashScreen,
+    navigationOptions: {
+      header: null,
+    },
+  },
   Login: {
     screen: LoginScreen,
     navigationOptions: {
@@ -13,6 +22,20 @@ const MainNavigator = createStackNavigator({
     screen: HomeNavigator,
     navigationOptions: {
       header: null,
+    },
+  },
+  DetailFeed: {
+    screen: DetailFeedScreen,
+    navigationOptions: {
+      header: null,
+    },
+  },
+}, {
+  headerMode: 'screen',
+  initialRouteName: 'Splash',
+  navigationOptions: {
+    header: {
+      visible: false,
     },
   },
 });

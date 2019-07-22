@@ -11,6 +11,7 @@ const ItemTab = (props) => {
   return (
     <View style={styles.container}>
       <FlatList
+        nestedScrollEnabled
         data={data}
         keyExtractor={(item, index) => index.toString()}
         showsVerticalScrollIndicator={false}

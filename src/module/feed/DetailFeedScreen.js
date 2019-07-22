@@ -3,6 +3,7 @@ import {
   View,
   Text,
   ImageBackground,
+  ScrollView,
   StyleSheet,
   TouchableOpacity,
   Dimensions,
@@ -105,18 +106,22 @@ class DetailFeed extends BasicComponent {
 
     return (
       <View style={styles.container}>
-        <ImageBackground
-          source={FoodImage}
-          style={styles.image}>
-          <View style={styles.gradientImage}>
-            {navbar}
-            {titleView}
-          </View>
 
-        </ImageBackground>
+        <ScrollView
+            style={styles.container}
+            contentContainerStyle={{ flexGrow: 1 }}>
+              <ImageBackground
+                source={FoodImage}
+                style={styles.image}>
+                <View style={styles.gradientImage}>
+                  {navbar}
+                  {titleView}
+                </View>
 
-        {galleriesView}
-        <TabDetailScreen/>
+              </ImageBackground>
+              {galleriesView}
+              <TabDetailScreen/>
+        </ScrollView>
 
       </View>
     );

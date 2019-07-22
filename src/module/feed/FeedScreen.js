@@ -17,6 +17,10 @@ class FeedScreen extends Component {
     data : [1, 2, 3, 4, 5, 6, 7]
   }
 
+  goToDetail = () => {
+    this.props.navigation.navigate('DetailFeed')
+  }
+
   render() {
 
     let navTop = null
@@ -41,7 +45,7 @@ class FeedScreen extends Component {
           </View>
 
           <View style={styles.menu}>
-            <TouchableOpacity>
+            <TouchableOpacity style={{padding: 10}}>
               <Image
                 style={styles.iconNotif}
                 source={require('../../assets/icon_notif.png')}
@@ -49,9 +53,8 @@ class FeedScreen extends Component {
               />
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity style={styles.iconMessage}>
               <Image
-                style={styles.iconMessage}
                 source={require('../../assets/icon_message.png')}
                 resizeMode="contain"
               />
@@ -61,21 +64,21 @@ class FeedScreen extends Component {
 
         </View>
 
-        {/* <View style={styles.listContainer}> */}
-          <FlatList
-            style={{top: 0, left: 0, right: 0, bottom: 0}}
-            contentContainerStyle={styles.listContainer}
-            data={this.state.data}
-            showsVerticalScrollIndicator={false}
-            renderItem={({item, index}) => 
-                <ItemFeed
-                    data={item}
-                    index={index}    
-                />
-            }
-            keyExtractor={(item, index) => index.toString()}
-          />
-        {/* </View> */}
+        <FlatList
+          style={{top: 0, left: 0, right: 0, bottom: 0}}
+          contentContainerStyle={styles.listContainer}
+          data={this.state.data}
+          showsVerticalScrollIndicator={false}
+          renderItem={({item, index}) => 
+              <ItemFeed
+                  onPress={this.goToDetail}
+                  data={item}
+                  index={index}    
+              />
+          }
+          numColumns={1}
+          keyExtractor={(item, index) => index.toString()}
+        />
 
       </View>
     );
@@ -125,8 +128,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   iconNotif: {
-    padding: 10,
-    marginRight: 20,
+    marginRight: 10,
   },
   iconMessage: {
     padding: 10,
@@ -134,9 +136,7 @@ const styles = StyleSheet.create({
 
   // item
   listContainer: {
-    paddingBottom: 10,
-    flexDirection: 'row',
-    flexWrap: 'wrap'
+    paddingBottom: 10
   },
 
 });

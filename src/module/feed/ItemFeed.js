@@ -10,7 +10,7 @@ const ItemFeed = (props) => {
   const { data } = props;
 
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={props.onPress}>
       <ImageBackground
         style={styles.imageBackground}
         imageStyle={styles.imageRadius}

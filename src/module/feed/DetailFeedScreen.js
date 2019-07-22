@@ -9,18 +9,18 @@ import {
   Platform,
   Image,
 } from 'react-native';
-
+import BasicComponent from '../BaseComponent';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
 import FoodImage from '../../assets/sample_food.jpeg';
+import TabDetailScreen from './TabDetailScreen';
 
 const isAndroid = Platform.OS === 'android';
 const screenWidth = Dimensions.get('window').width;
 
-class DetailFeed extends Component {
+class DetailFeed extends BasicComponent {
 
   state = {
-    images: [1, 2, 3, 4],
+    images: [1, 2, 3, 4, 5, 6, 7],
     parentGalleryWidth : 0.0,
     parentGalleryHeight : 0.0,
   }
@@ -65,7 +65,9 @@ class DetailFeed extends Component {
 
     const navbar = (
       <View style={styles.navigationBarView}>
-        <TouchableOpacity style={styles.backToView}>
+        <TouchableOpacity 
+          style={styles.backToView}
+          onPress={() => this.handleBackButton()}>
           <Ionicons
             name="ios-arrow-back"
             size={25}
@@ -114,6 +116,7 @@ class DetailFeed extends Component {
         </ImageBackground>
 
         {galleriesView}
+        <TabDetailScreen/>
 
       </View>
     );
@@ -133,7 +136,7 @@ const styles = StyleSheet.create({
 
   // navbar
   navigationBarView: {
-    paddingTop: isAndroid ? 10 : 50,
+    paddingTop: isAndroid ? 20 : 50,
     paddingLeft: 20,
     paddingRight: 20,
     flexDirection: 'row',

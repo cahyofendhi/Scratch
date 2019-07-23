@@ -20,10 +20,18 @@ class SearchScreen extends Component {
     dataOri: Sample.dataFeed,
   }
 
+  constructor(props){
+    super(props)
+    if (Platform.OS === "android") {
+      UIManager.setLayoutAnimationEnabledExperimental &&
+        UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
+  }
+
   updateSearch = query => {
     var newData = this.state.dataOri;
     newData = this.state.dataOri.filter(item => {
-      const itemData = item.toLowerCase();
+      const itemData = item.name.toLowerCase();
       const textData = query.toLowerCase();
       return itemData.indexOf(textData) > -1;
     });
@@ -32,6 +40,22 @@ class SearchScreen extends Component {
       data: newData
     });
   };
+
+  updateExpanded = (item) => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    this.setState(prevState => {
+      // find index of element
+      const indexOfElement = prevState.data.findIndex(s => s.id === item.id);
+      if(indexOfElement > -1) {
+        // if element exists copy the array...
+        const sitesCopy = [...prevState.data];
+        // ...and update the object
+        sitesCopy[indexOfElement].isExpanded = !item.isExpanded;
+        return { data: sitesCopy }
+      } 
+      // there was no element with a given key so we don't update anything
+    })
+  }
 
   render() {
 
@@ -43,13 +67,15 @@ class SearchScreen extends Component {
         <View style={styles.content}>
           <SearchBar
             containerStyle={{
-              backgroundColor: 'white',
+              backgroundColor: '#F7F7F7',
             }}
             lightTheme={true}
             inputContainerStyle={{
-              backgroundColor: '#F7F7F7'
+              backgroundColor: '#F2F2F2'
             }}
-            round={true}
+            inputStyle={{
+              color: '#030F09'
+            }}
             placeholder="Search..."
             onChangeText={this.updateSearch}
             value={query}
@@ -61,6 +87,7 @@ class SearchScreen extends Component {
                 <ItemSearch
                   index= {index}
                   item= {item}
+                  expanded= {() => this.updateExpanded(item)}
                 />
               }
               keyExtractor={(item, index) => index.toString()}
@@ -77,7 +104,7 @@ const styles = {
   container: {
     flex: 1,
     width: '100%', 
-    backgroundColor: "white"
+    backgroundColor: "#F7F7F7"
   },
   content: {
     flex: 1,
@@ -87,7 +114,7 @@ const styles = {
   },
   resultView: {
     flex: 1,
-    width: '100%'
+    flexDirection: 'column',
   }
 };
 

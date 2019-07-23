@@ -174,15 +174,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   saveText: {
-    color: "rgb(48, 190, 118)",
+    color: 'rgb(48, 190, 118)',
     fontSize: 14,
-    fontStyle: "normal",
-    fontWeight: "bold",
-    textAlign: "left",
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    textAlign: 'left',
     lineHeight: 18,
     letterSpacing: 0.4,
-    backgroundColor: "transparent",
-},
+    backgroundColor: 'transparent',
+  },
 });
 
 export default ItemFeed;

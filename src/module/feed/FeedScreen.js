@@ -6,6 +6,8 @@ import {
   StyleSheet,
   FlatList,
   Platform,
+  StatusBar,
+  SafeAreaView,
 } from 'react-native';
 
 import ItemFeed from './ItemFeed';
@@ -23,64 +25,59 @@ class FeedScreen extends Component {
 
   render() {
 
-    let navTop = null
-    if (Platform.OS == 'ios'){
-      navTop = <View style={{ height: 20 }} />
-    }
-
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
+        <StatusBar barStyle={"light-content"} />
+        <View style={styles.container}>
+          {/* header */}
+          <View style={styles.nav}>
 
-        {navTop}
+            <View style={styles.logoView}>
+              <Image
+                source={require('../../assets/logo.png')}
+                style={styles.logo}
+                resizeMode="contain"/>
+              <Text style={styles.scratchText}>Scratch</Text>
+            </View>
 
-        {/* header */}
-        <View style={styles.nav}>
+            <View style={styles.menu}>
+              <TouchableOpacity style={{padding: 10}}>
+                <Image
+                  style={styles.iconNotif}
+                  source={require('../../assets/icon_notif.png')}
+                  resizeMode="contain"
+                />
+              </TouchableOpacity>
 
-          <View style={styles.logoView}>
-            <Image
-              source={require('../../assets/logo.png')}
-              style={styles.logo}
-              resizeMode="contain"/>
-            <Text style={styles.scratchText}>Scratch</Text>
+              <TouchableOpacity style={styles.iconMessage}>
+                <Image
+                  source={require('../../assets/icon_message.png')}
+                  resizeMode="contain"
+                />
+              </TouchableOpacity>
+
+            </View>
+
           </View>
 
-          <View style={styles.menu}>
-            <TouchableOpacity style={{padding: 10}}>
-              <Image
-                style={styles.iconNotif}
-                source={require('../../assets/icon_notif.png')}
-                resizeMode="contain"
-              />
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.iconMessage}>
-              <Image
-                source={require('../../assets/icon_message.png')}
-                resizeMode="contain"
-              />
-            </TouchableOpacity>
-
-          </View>
+          <FlatList
+            style={{top: 0, left: 0, right: 0, bottom: 0}}
+            contentContainerStyle={styles.listContainer}
+            data={this.state.data}
+            showsVerticalScrollIndicator={false}
+            renderItem={({item, index}) => 
+                <ItemFeed
+                    onPress={this.goToDetail}
+                    data={item}
+                    index={index}    
+                />
+            }
+            numColumns={1}
+            keyExtractor={(item, index) => index.toString()}
+          />
 
         </View>
-
-        <FlatList
-          style={{top: 0, left: 0, right: 0, bottom: 0}}
-          contentContainerStyle={styles.listContainer}
-          data={this.state.data}
-          showsVerticalScrollIndicator={false}
-          renderItem={({item, index}) => 
-              <ItemFeed
-                  onPress={this.goToDetail}
-                  data={item}
-                  index={index}    
-              />
-          }
-          numColumns={1}
-          keyExtractor={(item, index) => index.toString()}
-        />
-
-      </View>
+      </SafeAreaView>
     );
   }
 }

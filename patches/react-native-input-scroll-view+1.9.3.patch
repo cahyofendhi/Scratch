@@ -1,0 +1,22 @@
+diff --git a/node_modules/react-native-input-scroll-view/index.js b/node_modules/react-native-input-scroll-view/index.js
+index 1200fe0..9680b3f 100644
+--- a/node_modules/react-native-input-scroll-view/index.js
++++ b/node_modules/react-native-input-scroll-view/index.js
+@@ -88,7 +88,7 @@ export default class extends PureComponent {
+         measureInputWidth: 0,
+     };
+ 
+-    componentWillMount() {
++    UNSAFE_componentWillMount() {
+         this._root = null;
+         this._curFocus = null;
+         this._measureCallback = null;
+@@ -100,7 +100,7 @@ export default class extends PureComponent {
+         this._extendScrollViewFunc();
+     }
+ 
+-    componentWillUnmount() {
++    UNSAFE_componentWillUnmount() {
+         this._removeListener();
+     }
+ 

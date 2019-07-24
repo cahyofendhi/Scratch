@@ -2,6 +2,7 @@ import React from 'react';
 import {
   View, Text, Image, StyleSheet, Dimensions, TouchableOpacity, ImageBackground,
 } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import Sample from '../../component/sample';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -37,10 +38,10 @@ const ItemFeed = (props) => {
         <View style={styles.groupTitle}>
           <Text style={styles.title}>Red Wine and Mint Soufflé</Text>
           <TouchableOpacity>
-            <Image
-              source={require('../../assets/icon_like.png')}
-              style={styles.like}
-              resizeMode="contain"
+            <Ionicons
+              name="ios-heart-empty"
+              size={24}
+              color="rgb(54, 56, 55)"
             />
           </TouchableOpacity>
         </View>

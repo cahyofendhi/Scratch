@@ -14,6 +14,7 @@ import {
 import Avatar from '../../assets/sample_avatar.png';
 import SampleFood from '../../assets/sample_food.jpeg';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import ImagePress from '../../component/ImagePress';
 
 // eslint-disable-next-line react/prefer-stateless-function
 const width = Dimensions.get('window').width;
@@ -33,7 +34,12 @@ class ProfileScreen extends Component {
   }
 
   render() {
-    const { data, isList } = this.state
+    const { data, isList, opacity } = this.state
+    const imageStyle = {
+      width: isList ? width - 10 : customHeight - 35,
+      height: isList ? customHeight : customHeight - 35,
+      borderRadius: 10
+    }
 
     return (
       <ScrollView style={styles.container}
@@ -97,19 +103,13 @@ class ProfileScreen extends Component {
             contentContainerStyle={styles.listView}
             data={data}
             renderItem={({item, index}) => 
-            <TouchableOpacity  
-                    style={{
-                        margin: 10,
-                    }}>      
-                <Image 
-                    style={{
-                        width: isList ? width - 10 : customHeight - 35,
-                        height: isList ? customHeight : customHeight - 35,
-                        borderRadius: 10
-                    }}
+            <View style={styles.imageContent}>      
+                <ImagePress 
+                    style={imageStyle}
                     resizeMode = 'cover'
                     source={SampleFood}/>
-            </TouchableOpacity>
+
+            </View>
             }
             numColumns={ isList ? 1 : 2 }
             horizontal={false}
@@ -193,6 +193,9 @@ const styles = StyleSheet.create({
     flex: 1/3,  
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  imageContent: {
+    margin: 10,
   }
 });
 

@@ -14,6 +14,7 @@ import {
 import Avatar from '../../assets/sample_avatar.png';
 import SampleFood from '../../assets/sample_food.jpeg';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import ImagePress from '../../component/ImagePress';
 
 // eslint-disable-next-line react/prefer-stateless-function
 const width = Dimensions.get('window').width;
@@ -22,12 +23,23 @@ const customHeight = width/2;
 class ProfileScreen extends Component {
   
   state = {
-      data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      isList: false,
   } 
 
+  handlingModeGallery = (isList) => {
+    this.setState({
+      isList : isList
+    })
+  }
 
   render() {
-    const { data } = this.state
+    const { data, isList, opacity } = this.state
+    const imageStyle = {
+      width: isList ? width - 10 : customHeight - 35,
+      height: isList ? customHeight : customHeight - 35,
+      borderRadius: 10
+    }
 
     return (
       <ScrollView style={styles.container}
@@ -43,7 +55,7 @@ class ProfileScreen extends Component {
                 <Text style={styles.descriptionView}>Follow</Text>
              </View>
 
-             <Image
+             <ImagePress
                 source={Avatar}
                 resizeMode="cover"
                 style={styles.avatar}
@@ -60,18 +72,22 @@ class ProfileScreen extends Component {
         <View style={styles.headerList}>
 
             <View style={styles.listMode}>
-                <Ionicons
-                    name='ios-list'
-                    size={30}
-                    color='rgba(96, 96, 96, 0.5)'
-                />
+                <TouchableOpacity onPress={() => this.handlingModeGallery(true)}>
+                  <Ionicons
+                      name='ios-list'
+                      size={30}
+                      color= {isList ? 'rgba(96, 96, 96, 1)' : 'rgba(96, 96, 96, 0.5)'}
+                  />
+                </TouchableOpacity>
 
-                <Ionicons
-                    style={styles.iconGrid}
-                    name='ios-grid'
-                    size={30}
-                    color='rgba(96, 96, 96, 1)'
-                />
+                <TouchableOpacity onPress={() => this.handlingModeGallery(false)}>
+                  <Ionicons
+                      style={styles.iconGrid}
+                      name='ios-grid'
+                      size={30}
+                      color= {isList ? 'rgba(96, 96, 96, 0.5)' : 'rgba(96, 96, 96, 1)'}
+                  />
+                </TouchableOpacity>
             </View>
             
             <Ionicons
@@ -83,28 +99,21 @@ class ProfileScreen extends Component {
         </View>
 
         <FlatList
-            contentContainerStyle={{
-                alignItems: 'center',
-                paddingBottom: 100,
-            }}
+            key={(isList ? 'l' : 'g')}
+            contentContainerStyle={styles.listView}
             data={data}
             renderItem={({item, index}) => 
-            <TouchableOpacity  
-                    style={{
-                        margin: 10,
-                    }}>      
-                <Image 
-                    style={{
-                        width: customHeight - 35, 
-                        height: customHeight - 35,
-                        borderRadius: 25
-                    }}
+            <View style={styles.imageContent}>      
+                <ImagePress 
+                    style={imageStyle}
                     resizeMode = 'cover'
                     source={SampleFood}/>
-            </TouchableOpacity>
+
+            </View>
             }
-            numColumns={2}
-            keyExtractor={(item, index) => index.toString()}
+            numColumns={ isList ? 1 : 2 }
+            horizontal={false}
+            keyExtractor={(item, index) =>  index.toString()}
         />
 
       </ScrollView>
@@ -160,6 +169,10 @@ const styles = StyleSheet.create({
   iconGrid: {
     marginLeft: 20
   },
+  listView: {
+    alignItems: 'center',
+    paddingBottom: 100,
+  },
   profileContent: {
     marginTop: 20,
     flex: 1,
@@ -180,6 +193,9 @@ const styles = StyleSheet.create({
     flex: 1/3,  
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  imageContent: {
+    margin: 10,
   }
 });
 

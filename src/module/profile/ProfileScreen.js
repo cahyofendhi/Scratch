@@ -10,6 +10,7 @@ import {
         FlatList,
         Dimensions,
 } from 'react-native';
+import ImagePicker from 'react-native-image-picker';
 
 import Avatar from '../../assets/sample_avatar.png';
 import SampleFood from '../../assets/sample_food.jpeg';
@@ -23,9 +24,42 @@ const customHeight = width/2;
 class ProfileScreen extends Component {
   
   state = {
+      avatarSource: "",
       data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       isList: false,
   } 
+
+  selectPhotoTapped() {
+    const options = {
+      quality: 1.0,
+      maxWidth: 500,
+      maxHeight: 500,
+      storageOptions: {
+        skipBackup: true,
+      },
+    };
+
+    ImagePicker.showImagePicker(options, response => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled photo picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      } else {
+        let source = {uri: response.uri};
+
+        // You can also display the image using data:
+        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+        this.setState({
+          avatarSource: response.uri,
+        });
+      }
+    });
+  }
 
   handlingModeGallery = (isList) => {
     this.setState({
@@ -34,7 +68,7 @@ class ProfileScreen extends Component {
   }
 
   render() {
-    const { data, isList, opacity } = this.state
+    const { data, isList, avatarSource } = this.state
     const imageStyle = {
       width: isList ? width - 10 : customHeight - 35,
       height: isList ? customHeight : customHeight - 35,
@@ -54,9 +88,10 @@ class ProfileScreen extends Component {
                 <Text style={styles.valueView}>125K</Text>
                 <Text style={styles.descriptionView}>Follow</Text>
              </View>
-
+ 
              <ImagePress
-                source={Avatar}
+                onPress={this.selectPhotoTapped.bind(this)}
+                source={ avatarSource.length > 0 ? { uri: avatarSource } : Avatar}
                 resizeMode="cover"
                 style={styles.avatar}
              />
@@ -120,6 +155,16 @@ class ProfileScreen extends Component {
     );
   }
 }
+
+// More info on all the options is below in the API Reference... just some common use cases shown here
+const options = {
+  title: 'Select Avatar',
+  customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+  storageOptions: {
+    skipBackup: true,
+    path: 'images',
+  },
+};
 
 const styles = StyleSheet.create({
   container: {

@@ -5,11 +5,12 @@ import { createBottomTabNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FeedScreen from '../feed/FeedScreen';
 import SearchScreen from '../search/SearchScreen';
+import ProfileScreen from '../profile/ProfileScreen';
 
 const HomeNavigator = createBottomTabNavigator({
   Search: SearchScreen,
   Feed: FeedScreen,
-  Cook: SearchScreen,
+  Cook: ProfileScreen,
 }, {
   initialRouteName: 'Feed',
   defaultNavigationOptions: ({ navigation }) => ({
@@ -20,7 +21,7 @@ const HomeNavigator = createBottomTabNavigator({
           return (
             <Ionicons
               name="ios-paper"
-              size={30}
+              size={25}
               color={tintColor}
             />
           );
@@ -28,7 +29,7 @@ const HomeNavigator = createBottomTabNavigator({
           return (
             <Ionicons
               name="ios-search"
-              size={30}
+              size={25}
               color={tintColor}
             />
           );
@@ -36,7 +37,7 @@ const HomeNavigator = createBottomTabNavigator({
           return (
             <Ionicons
               name="ios-person"
-              size={30}
+              size={25}
               color={tintColor}
             />
           );
@@ -44,7 +45,7 @@ const HomeNavigator = createBottomTabNavigator({
           return (
             <Ionicons
               name="ios-search"
-              size={40}
+              size={25}
               color={tintColor}
             />
           );

@@ -55,7 +55,7 @@ class ProfileScreen extends Component {
                 <Text style={styles.descriptionView}>Follow</Text>
              </View>
 
-             <Image
+             <ImagePress
                 source={Avatar}
                 resizeMode="cover"
                 style={styles.avatar}

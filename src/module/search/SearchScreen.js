@@ -28,6 +28,10 @@ class SearchScreen extends Component {
     }
   }
 
+  goToDetail = () => {
+    this.props.navigation.navigate('DetailFeed')
+  }
+
   updateSearch = query => {
     var newData = this.state.dataOri;
     newData = this.state.dataOri.filter(item => {
@@ -85,6 +89,7 @@ class SearchScreen extends Component {
               data={data}
               renderItem={({ item, index }) => 
                 <ItemSearch
+                  onPress={() => this.goToDetail()}
                   index= {index}
                   item= {item}
                   expanded= {() => this.updateExpanded(item)}

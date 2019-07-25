@@ -67,6 +67,10 @@ class ProfileScreen extends Component {
     })
   }
 
+  goToDetail = () => {
+    this.props.navigation.navigate('DetailFeed')
+  }
+
   render() {
     const { data, isList, avatarSource } = this.state
     const imageStyle = {
@@ -140,6 +144,7 @@ class ProfileScreen extends Component {
             renderItem={({item, index}) => 
             <View style={styles.imageContent}>      
                 <ImagePress 
+                    onPress={() => this.goToDetail()}
                     style={imageStyle}
                     resizeMode = 'cover'
                     source={SampleFood}/>

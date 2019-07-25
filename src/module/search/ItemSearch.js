@@ -11,6 +11,7 @@ const ItemSearch = props => (
   <TouchableOpacity
     style={{ ...styles.childContainer, ...{ marginTop: props.index === 0 ? 20 : 5 } }}
     key={props.index}
+    onPress={props.onPress}
   >
     <View style={styles.itemContent}>
 

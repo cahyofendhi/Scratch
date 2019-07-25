@@ -10,6 +10,8 @@ import {
   SafeAreaView,
 } from 'react-native';
 
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Evilicons from 'react-native-vector-icons/EvilIcons';
 import ItemFeed from './ItemFeed';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
@@ -42,24 +44,34 @@ class FeedScreen extends Component {
 
             <View style={styles.menu}>
               <TouchableOpacity style={{padding: 10}}>
-                <Image
+                <Ionicons
                   style={styles.iconNotif}
-                  source={require('../../assets/icon_notif.png')}
-                  resizeMode="contain"
+                  name='ios-notifications-outline'
+                  size={30}
+                  color='rgb(54, 56, 55)'
                 />
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.iconMessage}>
-                <Image
-                  source={require('../../assets/icon_message.png')}
-                  resizeMode="contain"
+                <Evilicons
+                  name='envelope'
+                  size={30}
+                  color='rgb(54, 56, 55)'
+                />
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.iconMessage}>
+                <Ionicons
+                  name='ios-list'
+                  size={30}
+                  color='rgb(54, 56, 55)'
                 />
               </TouchableOpacity>
 
             </View>
 
           </View>
-
+        
           <FlatList
             style={{top: 0, left: 0, right: 0, bottom: 0}}
             contentContainerStyle={styles.listContainer}
@@ -125,7 +137,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   iconNotif: {
-    marginRight: 10,
+    marginRight: 0,
   },
   iconMessage: {
     padding: 10,

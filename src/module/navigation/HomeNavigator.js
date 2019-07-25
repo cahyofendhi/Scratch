@@ -2,13 +2,15 @@ import React from 'react';
 import { Text, View, Image } from 'react-native';
 
 import { createBottomTabNavigator } from 'react-navigation';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import FeedScreen from '../feed/FeedScreen';
 import SearchScreen from '../search/SearchScreen';
+import ProfileScreen from '../profile/ProfileScreen';
 
 const HomeNavigator = createBottomTabNavigator({
   Search: SearchScreen,
   Feed: FeedScreen,
-  Cook: SearchScreen,
+  Cook: ProfileScreen,
 }, {
   initialRouteName: 'Feed',
   defaultNavigationOptions: ({ navigation }) => ({
@@ -17,34 +19,34 @@ const HomeNavigator = createBottomTabNavigator({
       switch (routeName) {
         case 'Feed':
           return (
-            <Image
-              source={require('../../assets/icon_explore.png')}
-              style={{ width: 25, height: 25, tintColor }}
-              resizeMode="contain"
+            <Ionicons
+              name="ios-paper"
+              size={25}
+              color={tintColor}
             />
           );
         case 'Search':
           return (
-            <Image
-              source={require('../../assets/icon_search.png')}
-              style={{ width: 25, height: 25, tintColor }}
-              resizeMode="contain"
+            <Ionicons
+              name="ios-search"
+              size={25}
+              color={tintColor}
             />
           );
         case 'Cook':
           return (
-            <Image
-              source={require('../../assets/icon_cook.png')}
-              style={{ width: 25, height: 25, tintColor }}
-              resizeMode="contain"
+            <Ionicons
+              name="ios-person"
+              size={25}
+              color={tintColor}
             />
           );
         default:
           return (
-            <Image
-              source={require('../../assets/icon_cook.png')}
-              style={{ width: 25, height: 25, tintColor }}
-              resizeMode="contain"
+            <Ionicons
+              name="ios-search"
+              size={25}
+              color={tintColor}
             />
           );
       }

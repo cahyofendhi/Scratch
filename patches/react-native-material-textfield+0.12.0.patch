@@ -12,7 +12,7 @@ index d6c9d64..9ce2ba9 100644
      let { active, focused, animationDuration } = this.props;
  
 diff --git a/node_modules/react-native-material-textfield/src/components/field/index.js b/node_modules/react-native-material-textfield/src/components/field/index.js
-index 52c1868..1374054 100644
+index 52c1868..39b6d74 100644
 --- a/node_modules/react-native-material-textfield/src/components/field/index.js
 +++ b/node_modules/react-native-material-textfield/src/components/field/index.js
 @@ -125,7 +125,7 @@ export default class TextField extends PureComponent {
@@ -29,7 +29,7 @@ index 52c1868..1374054 100644
    }
  
 -  componentWillUnmount() {
-+  UNSAFE_componentWillUnmount() {
++  UNSAFE_componentWillMount() {
      this.mounted = false;
    }
  
@@ -39,13 +39,13 @@ index 52c1868..1374054 100644
      let { focus, focused } = this.state;
  
 diff --git a/node_modules/react-native-material-textfield/src/components/label/index.js b/node_modules/react-native-material-textfield/src/components/label/index.js
-index ac3ed53..b3e3c63 100644
+index ac3ed53..8e315d7 100644
 --- a/node_modules/react-native-material-textfield/src/components/label/index.js
 +++ b/node_modules/react-native-material-textfield/src/components/label/index.js
 @@ -46,7 +46,7 @@ export default class Label extends PureComponent {
      };
    }
-   
+ 
 -  componentWillReceiveProps(props) {
 +  UNSAFE_componentWillReceiveProps(props) {
      let { focus, input } = this.state;

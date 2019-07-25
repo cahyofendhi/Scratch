@@ -25,11 +25,13 @@ class ImagePress extends Component {
   render() {
     return (
       <TouchableWithoutFeedback 
+        onPress={this.props.onPress}
         onPressIn={() => this.animateIn()}
         onPressOut={ () => this.animateOut()}>
 
         <Animated.Image
           {...this.props}
+          source={this.props.source}
           style={[
             {
               transform: [

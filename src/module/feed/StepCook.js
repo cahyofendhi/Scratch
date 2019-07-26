@@ -14,32 +14,32 @@ import SampleFood from '../../assets/sample_food.jpeg';
 import BaseComponent from '../BaseComponent';
 import Sample from '../../component/sample';
 
-const labels = ['Cart', 'Delivery Address', 'Order Summary', 'Payment Method', 'Track'];
 const stepIndicatorStyles = {
-  stepIndicatorSize: 30,
-  currentStepIndicatorSize: 40,
-  separatorStrokeWidth: 3,
-  currentStepStrokeWidth: 5,
-  stepStrokeCurrentColor: '#fe7013',
-  separatorFinishedColor: '#fe7013',
+  stepIndicatorSize: 25,
+  currentStepIndicatorSize: 25,
+  separatorStrokeWidth: 0,
+  currentStepStrokeWidth: 2,
+  stepStrokeCurrentColor: 'rgb(48, 190, 118)',
+  separatorFinishedColor: 'rgb(48, 190, 118)',
   separatorUnFinishedColor: '#aaaaaa',
-  stepIndicatorFinishedColor: '#fe7013',
-  stepIndicatorUnFinishedColor: '#aaaaaa',
+  stepIndicatorFinishedColor: 'rgba(48, 190, 118, 1)',
+  stepIndicatorUnFinishedColor: 'rgba(48, 190, 118, 0.5)',
   stepIndicatorCurrentColor: '#ffffff',
-  stepIndicatorLabelFontSize: 15,
-  currentStepIndicatorLabelFontSize: 15,
+  stepIndicatorLabelFontSize: 12,
+  currentStepIndicatorLabelFontSize: 12,
   stepIndicatorLabelCurrentColor: '#000000',
   stepIndicatorLabelFinishedColor: '#ffffff',
   stepIndicatorLabelUnFinishedColor: 'rgba(255,255,255,0.5)',
   labelColor: '#666666',
-  labelSize: 15,
-  currentStepLabelColor: '#fe7013'
+  labelSize: 12,
+  currentStepLabelColor: 'rgb(48, 190, 118)'
 }
 
 class StepCook extends BaseComponent {
     
   state = {
       currentPosition: 0,
+      currentPage: 0,
       data: [1, 2, 3, 4, 5]
   }
 
@@ -48,10 +48,20 @@ class StepCook extends BaseComponent {
     this.viewabilityConfig = { itemVisiblePercentThreshold: 40 }
   }
 
+  renderPage = rowData => {
+    const item = rowData.item
+    return (
+      <View style={styles.rowItem}>
+        <Text style={styles.itemTitle}>{item.title}</Text>
+        <Text style={styles.body}>{item.body}</Text>
+      </View>
+    )
+  }
+
   onViewableItemsChanged = ({ viewableItems, changed }) => {
     const visibleItemsCount = viewableItems.length
     if (visibleItemsCount != 0) {
-      this.setState({ currentPosition: viewableItems[visibleItemsCount - 1].index })
+      this.setState({ currentPage: viewableItems[visibleItemsCount - 1].index })
     }
   }
 
@@ -82,31 +92,25 @@ class StepCook extends BaseComponent {
         </View>
 
         {/* step indicator */}
-        <View style={styles.stepIndicator}>
-          <StepIndicator
+        <Text style={styles.stepsText}>Steps</Text>
+        <View style={styles.indicatorView}>
+          <View style={styles.stepIndicator}>
+            <StepIndicator
               customStyles={stepIndicatorStyles}
-              stepCount={data.length}
+              stepCount={Sample.data.length}
               direction='vertical'
               currentPosition={this.state.currentPage}
-              labels={data.map(item => item.toString())}
             />
+          </View>
           <FlatList
             style={{ flexGrow: 1 }}
-            data={data}
-            renderItem={({item, index}) => 
-              <View 
-                key={index}
-                style={{
-                  paddingVertical: 10,
-                }}
-              >
-                 <Text>{Sample.stepCook}</Text> 
-              </View>
-            }
+            data={Sample.data}
+            renderItem={this.renderPage}
             onViewableItemsChanged={this.onViewableItemsChanged}
             viewabilityConfig={this.viewabilityConfig}
           />
         </View>
+
       </SafeAreaView>
     );
   }
@@ -115,6 +119,7 @@ class StepCook extends BaseComponent {
 const styles = StyleSheet.create({
   container : {
     flex: 1,
+    flexDirection: 'column',
     backgroundColor: 'white',
   },
   backView: {
@@ -154,11 +159,43 @@ const styles = StyleSheet.create({
     aspectRatio: 2/1
   },
 
-  // step indicator
+  // step 
+  stepsText: {
+    color: "rgb(3, 15, 9)",
+    fontSize: 16,
+    fontStyle: "normal",
+    fontWeight: "bold",
+    marginTop: 15,
+    marginLeft: 20,
+  },
+  indicatorView: {
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: '#ffffff',
+    marginTop: 5
+  },
   stepIndicator: {
     marginVertical: 50,
     paddingHorizontal: 20
   },
+  rowItem: {
+    flex: 3,
+    paddingVertical: 20
+  },
+  itemTitle: {
+    flex: 1,
+    fontSize: 20,
+    color: '#333333',
+    paddingVertical: 16,
+    fontWeight: '600'
+  },
+  body: {
+    flex: 1,
+    fontSize: 15,
+    color: '#606060',
+    lineHeight: 24,
+    marginRight: 8
+  }
 })
 
 export default StepCook;

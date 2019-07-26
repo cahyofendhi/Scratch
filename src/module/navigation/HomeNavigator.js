@@ -10,7 +10,7 @@ import ProfileScreen from '../profile/ProfileScreen';
 const HomeNavigator = createBottomTabNavigator({
   Search: SearchScreen,
   Feed: FeedScreen,
-  Cook: ProfileScreen,
+  Profile: ProfileScreen,
 }, {
   initialRouteName: 'Feed',
   defaultNavigationOptions: ({ navigation }) => ({
@@ -33,7 +33,7 @@ const HomeNavigator = createBottomTabNavigator({
               color={tintColor}
             />
           );
-        case 'Cook':
+        case 'Profile':
           return (
             <Ionicons
               name="ios-person"

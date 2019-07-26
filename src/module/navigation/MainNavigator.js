@@ -4,6 +4,7 @@ import SplashScreen from '../SplashScreen';
 import LoginScreen from '../auth/loginScreen';
 import HomeNavigator from './HomeNavigator';
 import DetailFeedScreen from '../feed/DetailFeedScreen';
+import StepCook from '../feed/StepCook';
 
 const MainNavigator = createStackNavigator({
   Splash: {
@@ -26,6 +27,12 @@ const MainNavigator = createStackNavigator({
   },
   DetailFeed: {
     screen: DetailFeedScreen,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  StepCook: {
+    screen: StepCook,
     navigationOptions: {
       header: null,
     },

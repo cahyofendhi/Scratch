@@ -26,6 +26,10 @@ class DetailFeed extends BasicComponent {
     parentGalleryHeight : 0.0,
   }
 
+  goToStepCook = () => {
+    this.props.navigation.navigate('StepCook')
+  }
+
   onPageGalleryLayout = (event) => {
     const { width, height } = event.nativeEvent.layout;
     this.setState({
@@ -76,7 +80,7 @@ class DetailFeed extends BasicComponent {
           />
           <Text style={styles.backToText}>Back</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.cookNowView}>
+        <TouchableOpacity style={styles.cookNowView} onPress={() => this.goToStepCook()}>
           <Ionicons
             name="ios-play"
             size={25}

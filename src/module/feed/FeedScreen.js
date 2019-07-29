@@ -31,6 +31,10 @@ class FeedScreen extends Component {
     this.props.navigation.navigate('DetailFeed')
   }
 
+  _goToChat = () => {
+    this.props.navigation.navigate('Chat')
+  }
+
   _setMaxHeight(event){
     this.setState({
         max_height   : event.nativeEvent.layout.height
@@ -86,7 +90,7 @@ class FeedScreen extends Component {
                 />
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.iconMessage}>
+              <TouchableOpacity style={styles.iconMessage} onPress={() => this._goToChat()}>
                 <Evilicons
                   name='envelope'
                   size={30}

@@ -10,12 +10,12 @@ import {
   Animated,
   StatusBar,
   SafeAreaView,
+  TouchableOpacity
 } from 'react-native';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Evilicons from 'react-native-vector-icons/EvilIcons';
 import ItemFeed from './ItemFeed';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class FeedScreen extends Component {
 
@@ -31,17 +31,17 @@ class FeedScreen extends Component {
     this.props.navigation.navigate('DetailFeed')
   }
 
-  _goToChat = () => {
+  goToChat = () => {
     this.props.navigation.navigate('Chat')
   }
 
-  _setMaxHeight(event){
+  setMaxHeight(event){
     this.setState({
         max_height   : event.nativeEvent.layout.height
     });
   }
 
-  _onFilter() {
+  onFilter() {
     const { expanded, max_height, min_height, animation } = this.state
 
     const initialValue = expanded ? max_height : min_height;
@@ -90,7 +90,7 @@ class FeedScreen extends Component {
                 />
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.iconMessage} onPress={() => this._goToChat()}>
+              <TouchableOpacity style={styles.iconMessage} onPress={() => this.goToChat()}>
                 <Evilicons
                   name='envelope'
                   size={30}
@@ -98,7 +98,7 @@ class FeedScreen extends Component {
                 />
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.iconMessage} onPress={() => this._onFilter()}>
+              <TouchableOpacity style={styles.iconMessage} onPress={() => this.onFilter()}>
                 <Ionicons
                   name='ios-list'
                   size={30}

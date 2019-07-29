@@ -46,16 +46,12 @@ class ChatScreen extends Component {
             <StatusBar barStyle={"light-content"} />
             <FlatList style={styles.list}
                 data={this.state.data}
-                keyExtractor= {(item) => {
-                    return item.id;
-                }}
-                renderItem={(message) => {
-                    console.log(item);
-                    const item = message.item;
+                keyExtractor= {(item, index) => index.toString()}
+                renderItem={({ item, index }) => {
                     let inMessage = item.type === 'in';
                     let itemStyle = inMessage ? styles.itemIn : styles.itemOut;
                     return (
-                    <View style={[styles.item, itemStyle]}>
+                    <View style={[styles.item, itemStyle]} key={index}>
                         {!inMessage && this.renderDate(item.date)}
                         <View style={[styles.balloon]}>
                         <Text>{item.message}</Text>

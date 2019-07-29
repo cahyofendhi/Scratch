@@ -5,6 +5,7 @@ import LoginScreen from '../auth/loginScreen';
 import HomeNavigator from './HomeNavigator';
 import DetailFeedScreen from '../feed/DetailFeedScreen';
 import StepCook from '../feed/StepCook';
+import ChatScreen from '../chat/ChatScreen';
 
 const MainNavigator = createStackNavigator({
   Splash: {
@@ -35,6 +36,16 @@ const MainNavigator = createStackNavigator({
     screen: StepCook,
     navigationOptions: {
       header: null,
+    },
+  },
+  Chat: {
+    screen: ChatScreen,
+    navigationOptions: {
+      title: 'Chat',
+      headerTintColor: 'rgb(54, 56, 55)',
+      headerStyle: {
+        backgroundColor: 'white',
+      },
     },
   },
 }, {

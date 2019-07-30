@@ -13,6 +13,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import SampleFood from '../../assets/sample_food.jpeg';
 import BaseComponent from '../BaseComponent';
 import Sample from '../../component/sample';
+console.disableYellowBox = true;
 
 const stepIndicatorStyles = {
   stepIndicatorSize: 25,

@@ -4,13 +4,17 @@ import {
         Text,
         View, 
         Image, 
+        Button,
         TouchableOpacity, 
         Animated, 
         ScrollView, 
         FlatList,
         Dimensions,
+        Easing,
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
+import Modal from 'react-native-modalbox';
+
 
 import Avatar from '../../assets/sample_avatar.png';
 import SampleFood from '../../assets/sample_food.jpeg';
@@ -18,7 +22,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import ImagePress from '../../component/ImagePress';
 
 // eslint-disable-next-line react/prefer-stateless-function
-const width = Dimensions.get('window').width;
+const { width, height } = Dimensions.get('window');
 const customHeight = width/2;
 
 class ProfileScreen extends Component {
@@ -27,6 +31,12 @@ class ProfileScreen extends Component {
       avatarSource: "",
       data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       isList: false,
+
+      // modal
+      isOpen: false,
+      isDisabled: false,
+      swipeToClose: true,
+      sliderValue: 0.3
   } 
 
   selectPhotoTapped() {
@@ -69,6 +79,26 @@ class ProfileScreen extends Component {
 
   goToDetail = () => {
     this.props.navigation.navigate('DetailFeed')
+  }
+
+  onModalOpened() {
+    this.setState({
+      isOpen: true,
+    });
+  }
+
+  onClose = () => {
+    this.setState({
+      isOpen: false,
+    });
+  }
+
+  onOpen() {
+    console.log('Modal just opened');
+  }
+
+  onClosingState(state) {
+    console.log('the open/close of the swipeToClose just changed');
   }
 
   render() {
@@ -129,11 +159,14 @@ class ProfileScreen extends Component {
                 </TouchableOpacity>
             </View>
             
-            <Ionicons
-                name='ios-add'
-                size={30}
-                color='rgba(96, 96, 96, 1)'
-            />
+            {/* add */}
+            <TouchableOpacity onPress={() =>  this.refs.modal1.open()}>
+              <Ionicons
+                  name='ios-add'
+                  size={30}
+                  color='rgba(96, 96, 96, 1)'
+              />
+            </TouchableOpacity>
 
         </View>
 
@@ -155,6 +188,25 @@ class ProfileScreen extends Component {
             horizontal={false}
             keyExtractor={(item, index) =>  index.toString()}
         />
+
+        <Modal
+          ref={"modal1"}
+          coverScreen
+          position="bottom"
+          entry="bottom"
+          backdropPressToClose = {true}
+          easing= {Easing.ease}
+          backButtonClose
+          swipeToClose
+          animationDuration={300}
+          swipeArea={(height/100) * 50}
+          useNativeDriver={false}
+          onClosed={this.onClose}
+          style={styles.modal}>
+
+          <Text style={styles.text}>Basic modal</Text>
+
+        </Modal>
 
       </ScrollView>
     );
@@ -246,7 +298,22 @@ const styles = StyleSheet.create({
   },
   imageContent: {
     margin: 10,
-  }
+  },
+
+  // modal
+  modal: {
+    height: (height/100) * 50,
+    justifyContent: 'flex-start',
+    padding: 20,
+    backgroundColor: 'white',
+  },
+  btn: {
+    margin: 10,
+    backgroundColor: "#3B5998",
+    color: "white",
+    padding: 10
+  },
+
 });
 
 export default ProfileScreen;

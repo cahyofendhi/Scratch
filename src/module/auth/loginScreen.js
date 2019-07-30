@@ -17,7 +17,7 @@ class LoginScreen extends Component {
     }
 
     submitLogin = () => {
-      this.props.navigation.navigate('MainHome')
+      this.props.navigation.navigate('App')
     }
 
     render() {

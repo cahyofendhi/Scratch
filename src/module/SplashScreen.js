@@ -34,7 +34,8 @@ class SplashScreen extends Component {
     
     _initializeApp = () => {
         setTimeout(() => {
-            this._navigateTo('Login')
+          this.props.navigation.navigate('Auth');
+            // this._navigateTo('Login')
         }, TIME_OUT)
     }
 

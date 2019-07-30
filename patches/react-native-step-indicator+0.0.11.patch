@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-native-step-indicator/StepIndicator.js b/node_modules/react-native-step-indicator/StepIndicator.js
+index 4c52f02..c705aac 100644
+--- a/node_modules/react-native-step-indicator/StepIndicator.js
++++ b/node_modules/react-native-step-indicator/StepIndicator.js
+@@ -87,7 +87,7 @@ export default class StepIndicator extends Component {
+     )
+   }
+ 
+-  componentWillReceiveProps (nextProps) {
++  UNSAFE_componentWillReceiveProps (nextProps) {
+     if (nextProps.customStyles !== this.props.customStyles) {
+       this.setState(state => ({
+         customStyles: Object.assign(state.customStyles, nextProps.customStyles)

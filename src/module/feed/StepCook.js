@@ -50,8 +50,9 @@ class StepCook extends BaseComponent {
 
   renderPage = rowData => {
     const item = rowData.item
+    const index = rowData.index
     return (
-      <View style={styles.rowItem}>
+      <View style={styles.rowItem} key={index}>
         <Text style={styles.itemTitle}>{item.title}</Text>
         <Text style={styles.body}>{item.body}</Text>
       </View>

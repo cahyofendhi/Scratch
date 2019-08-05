@@ -1,4 +1,4 @@
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { createSwitchNavigator, createStackNavigator, createAppContainer } from 'react-navigation';
 
 import SplashScreen from '../SplashScreen';
 import LoginScreen from '../auth/loginScreen';
@@ -7,19 +7,7 @@ import DetailFeedScreen from '../feed/DetailFeedScreen';
 import StepCook from '../feed/StepCook';
 import ChatScreen from '../chat/ChatScreen';
 
-const MainNavigator = createStackNavigator({
-  Splash: {
-    screen: SplashScreen,
-    navigationOptions: {
-      header: null,
-    },
-  },
-  Login: {
-    screen: LoginScreen,
-    navigationOptions: {
-      header: null,
-    },
-  },
+const AppStack = createStackNavigator({
   MainHome: {
     screen: HomeNavigator,
     navigationOptions: {
@@ -50,12 +38,39 @@ const MainNavigator = createStackNavigator({
   },
 }, {
   headerMode: 'screen',
-  initialRouteName: 'Splash',
+  initialRouteName: 'MainHome',
   navigationOptions: {
     header: {
       visible: false,
     },
   },
 });
+
+const AuthStack = createStackNavigator({
+  Login: {
+    screen: LoginScreen,
+    navigationOptions: {
+      header: null,
+    },
+  },
+}, {
+  initialRouteName: 'Login',
+});
+
+const MainNavigator = createSwitchNavigator(
+  {
+    Splash: {
+      screen: SplashScreen,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    Auth: AuthStack,
+    App: AppStack,
+  },
+  {
+    initialRouteName: 'Splash',
+  },
+);
 
 export default createAppContainer(MainNavigator);

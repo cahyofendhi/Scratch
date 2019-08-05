@@ -13,6 +13,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import SampleFood from '../../assets/sample_food.jpeg';
 import BaseComponent from '../BaseComponent';
 import Sample from '../../component/sample';
+console.disableYellowBox = true;
 
 const stepIndicatorStyles = {
   stepIndicatorSize: 25,
@@ -50,8 +51,9 @@ class StepCook extends BaseComponent {
 
   renderPage = rowData => {
     const item = rowData.item
+    const index = rowData.index
     return (
-      <View style={styles.rowItem}>
+      <View style={styles.rowItem} key={index}>
         <Text style={styles.itemTitle}>{item.title}</Text>
         <Text style={styles.body}>{item.body}</Text>
       </View>
